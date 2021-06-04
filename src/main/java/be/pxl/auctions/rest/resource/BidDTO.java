@@ -1,33 +1,16 @@
-package be.pxl.auctions.model;
+package be.pxl.auctions.rest.resource;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import be.pxl.auctions.model.Auction;
+import be.pxl.auctions.model.User;
+
 import java.time.LocalDate;
 
-@Entity
-public class Bid {
-    @Id
-    @GeneratedValue
+public class BidDTO {
     private long id;
     private double amount;
     private LocalDate date;
-    @ManyToOne
     private Auction auction;
-    @ManyToOne
     private User user;
-
-    public Bid() {
-    }
-
-    public Bid(User user, LocalDate date, double amount, Auction auction) {
-        this.user = user;
-        this.date = date;
-        this.amount = amount;
-        this.auction = auction;
-        auction.addBid(this);
-    }
 
     public long getId() {
         return id;
