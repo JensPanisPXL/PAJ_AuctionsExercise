@@ -8,6 +8,7 @@ import be.pxl.auctions.model.Bid;
 import be.pxl.auctions.model.User;
 import be.pxl.auctions.rest.resource.BidCreateResource;
 import be.pxl.auctions.rest.resource.BidDTO;
+import be.pxl.auctions.rest.resource.UserDTO;
 import be.pxl.auctions.util.EmailValidator;
 import be.pxl.auctions.util.exception.*;
 import org.apache.commons.lang3.StringUtils;
@@ -63,9 +64,19 @@ public class BidService {
         bidDTO.setId(saveBid.getId());
         bidDTO.setAmount(saveBid.getAmount());
         bidDTO.setDate(saveBid.getDate());
-        bidDTO.setAuction(saveBid.getAuction());
-        bidDTO.setUser(saveBid.getUser());
+        bidDTO.setUser(mapUserDTO(saveBid.getUser()));
         return bidDTO;
+    }
+
+    private UserDTO mapUserDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setAge(user.getAge());
+        userDTO.setId(user.getId());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setDateOfBirth(user.getDateOfBirth());
+        userDTO.setFirstName(user.getFirstName());
+        userDTO.setLastName(user.getLastName());
+        return userDTO;
     }
 
     private Bid mapToBid(BidCreateResource bidInfo, long auctionId) {

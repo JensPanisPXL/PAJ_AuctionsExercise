@@ -9,8 +9,7 @@ public class BidDTO {
     private long id;
     private double amount;
     private LocalDate date;
-    private Auction auction;
-    private User user;
+    private UserDTO user;
 
     public long getId() {
         return id;
@@ -36,19 +35,11 @@ public class BidDTO {
         this.date = date;
     }
 
-    public Auction getAuction() {
-        return auction;
-    }
-
-    public void setAuction(Auction auction) {
-        this.auction = auction;
-    }
-
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 }

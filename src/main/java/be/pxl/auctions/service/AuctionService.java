@@ -2,8 +2,12 @@ package be.pxl.auctions.service;
 
 import be.pxl.auctions.dao.AuctionDao;
 import be.pxl.auctions.model.Auction;
+import be.pxl.auctions.model.Bid;
+import be.pxl.auctions.model.User;
 import be.pxl.auctions.rest.resource.AuctionCreateResource;
 import be.pxl.auctions.rest.resource.AuctionDTO;
+import be.pxl.auctions.rest.resource.BidDTO;
+import be.pxl.auctions.rest.resource.UserDTO;
 import be.pxl.auctions.util.exception.AuctionNotFoundException;
 import be.pxl.auctions.util.exception.InvalidDateException;
 import be.pxl.auctions.util.exception.RequiredFieldException;
@@ -51,11 +55,33 @@ public class AuctionService {
         auctionDTO.setId(auction.getId());
         auctionDTO.setEndDate(auction.getEndDate());
         auctionDTO.setDescription(auction.getDescription());
-        /*uctionDTO.setBids(auction.getBids());
-        auctionDTO.setHighestBid(auction.findHighestBid());
+            auctionDTO.setHighestBid(mapToBidDTO(auction.findHighestBid()));
+            for (Bid b: auction.getBids()){
+                BidDTO bidDTO = mapToBidDTO(b);
+                auctionDTO.bids.add(bidDTO);
+            }
         auctionDTO.setNumberOfBids(auction.getBids().size());
-        auctionDTO.setUser(auction.findHighestBid().getUser());*/
         return auctionDTO;
+    }
+
+    private BidDTO mapToBidDTO(Bid highestBid) {
+        BidDTO bidDTO = new BidDTO();
+        bidDTO.setUser(mapUserDTO(highestBid.getUser()));
+        bidDTO.setAmount(highestBid.getAmount());
+        bidDTO.setId(highestBid.getId());
+        bidDTO.setDate(highestBid.getDate());
+        return bidDTO;
+    }
+
+    private UserDTO mapUserDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setAge(user.getAge());
+        userDTO.setId(user.getId());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setDateOfBirth(user.getDateOfBirth());
+        userDTO.setFirstName(user.getFirstName());
+        userDTO.setLastName(user.getLastName());
+        return userDTO;
     }
 
     private Auction mapToAuction(AuctionCreateResource auctionInfo) {

@@ -3,8 +3,8 @@ package be.pxl.auctions.model;
 import java.time.LocalDate;
 
 public final class AuctionBuilder {
-    public static final String DESCRIPTION = "AuctionLand";
-    public static final LocalDate END_DATE = LocalDate.now().minusDays(5);
+    public static final String DESCRIPTION = "auctionLand";
+    public static final LocalDate END_DATE = LocalDate.now().plusYears(10);
 
     private long id;
     private String description = DESCRIPTION;

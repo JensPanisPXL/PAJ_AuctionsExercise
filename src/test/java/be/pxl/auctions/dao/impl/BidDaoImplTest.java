@@ -1,9 +1,6 @@
 package be.pxl.auctions.dao.impl;
 
-import be.pxl.auctions.model.Bid;
-import be.pxl.auctions.model.BidBuilder;
-import be.pxl.auctions.model.User;
-import be.pxl.auctions.model.UserBuilder;
+import be.pxl.auctions.model.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -28,6 +25,8 @@ public class BidDaoImplTest {
     @Test
     public void bidCanBeSaved() {
         Bid bid = BidBuilder.aBid().build();
+        Auction auction = AuctionBuilder.anAuction().build();
+        auction.addBid(bid);
         Bid savedBid = bidDao.saveBid(bid);
         entityManager.flush();
         entityManager.clear();

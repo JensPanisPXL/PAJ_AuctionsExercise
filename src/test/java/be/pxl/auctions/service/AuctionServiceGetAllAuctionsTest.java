@@ -4,19 +4,20 @@ import be.pxl.auctions.dao.AuctionDao;
 import be.pxl.auctions.model.Auction;
 import be.pxl.auctions.model.AuctionBuilder;
 import be.pxl.auctions.rest.resource.AuctionDTO;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class AuctionServiceGetAllAuctionsTest {
 
     private static final long AUCTION_ID = 5L;
@@ -25,27 +26,17 @@ public class AuctionServiceGetAllAuctionsTest {
     private AuctionDao auctionDao;
     @InjectMocks
     private AuctionService auctionService;
-    private Auction auction;
-    private Auction auction2;
-
-    @BeforeEach
-    void init() {
-        auction = AuctionBuilder.anAuction().withId(AUCTION_ID).build();
-        auction2 = AuctionBuilder.anAuction().withId(AUCTION_ID + 1).build();
-    }
 
     @Test
     public void returnsListOfAuctionDTOS() {
-        //Deze test begrijp ik niet zo goed?
+        Auction auction1 = AuctionBuilder.anAuction().withId(AUCTION_ID).build();
+        Auction auction2 = AuctionBuilder.anAuction().withId(AUCTION_ID + 1).build();
 
-        List<Auction> expectedList = new ArrayList<>();
-        expectedList.add(auction);
-        expectedList.add(auction2);
-        //List<AuctionDTO> expectedDTOList = expectedList.stream().map()
+        when(auctionDao.findAllAuctions()).thenReturn(Arrays.asList(auction1, auction2));
+        List<AuctionDTO> actualList = auctionService.getAllAuctions();
 
-        //when(auctionDao.findAllAuctions()).thenReturn(expectedList);
-        //List<AuctionDTO> actualList = auctionService.getAllAuctions();
-
-        assertFalse(false);
+        assertEquals(actualList.size(), 2);
+        assertTrue(actualList.contains(auction1));
+        assertTrue(actualList.contains(auction2));
     }
 }

@@ -58,7 +58,7 @@ public class Auction {
     }
 
     public Bid findHighestBid() {
-        if (getBids().size() != 0) {
+        if (getBids().size() > 0) {
             return getBids().stream().max(Comparator.comparingDouble(Bid::getAmount)).get();
         } else {
             return null;

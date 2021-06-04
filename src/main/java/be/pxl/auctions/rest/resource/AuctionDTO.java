@@ -11,10 +11,9 @@ public class AuctionDTO {
     private long id;
     private String description;
     private LocalDate endDate;
-    /*public List<Bid> bids = new ArrayList<>();
+    public List<BidDTO> bids = new ArrayList<>();
     private int numberOfBids;
-    private Bid highestBid;
-    private User user;*/
+    private BidDTO highestBid = new BidDTO();
 
     public long getId() {
         return id;
@@ -40,11 +39,11 @@ public class AuctionDTO {
         this.endDate = endDate;
     }
 
-    /*public List<Bid> getBids() {
+    public List<BidDTO> getBids() {
         return bids;
     }
 
-    public void setBids(List<Bid> bids) {
+    public void setBids(List<BidDTO> bids) {
         this.bids = bids;
     }
 
@@ -56,19 +55,11 @@ public class AuctionDTO {
         this.numberOfBids = numberOfBids;
     }
 
-    public Bid getHighestBid() {
+    public BidDTO getHighestBid() {
         return highestBid;
     }
 
-    public void setHighestBid(Bid highestBid) {
+    public void setHighestBid(BidDTO highestBid) {
         this.highestBid = highestBid;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }*/
 }
